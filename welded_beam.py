@@ -1,3 +1,4 @@
+# Welded beam structure problem(焊樑結構問題)
 import numpy as np
 
 # 设置参数(主要)
@@ -8,35 +9,51 @@ dim = 2 # 维度
 # 最大迭代次數
 MaxIter = 100  
 # 下邊界
-lb = 0.001*np.ones(dim)
+lb = [0.1,0.1,0.1,0.1]
 # 上邊界
-ub = 1*np.ones(dim)
+ub = [2,10,10,2]
+
+# 參考焊接樑設計問題>問題模型(四)
+def fun(X):
+    # 焊縫厚度(h)
+    x1 = X[0]
+    # 鋼筋連接部分長度(l)
+    x2 = X[1]
+    # 鋼筋高度(t)
+    x3 = X[2]
+    # 鋼筋厚度(b)
+    x4 = X[3]
+
+    # 問題參數
+    P = 60001 
+    L = 14
+    delta_max = 0.25
+    E = 30*10**6
+    G = 12 * 10**6
+    t_max = 13600
+    sigma_max = 30000 
+
+    # 問題變數
+
+    M = P * (L+(x2/2))
+    R = np.sqrt(x2**2/4+((x1+x3)/2)**2)
+    J = 2*(np.sqrt(2)*x1*x2*((x2**2/4)*((x1+x3)/2)**2))
+
+    # 樑的彎曲應力(s)
+    sigma = 6*P*L / (x4*x3**2)
+    # 梁的末端挠度(d)
+    delta = 4*P*L**3 / (E*x3**2+x4)
+    # 杆件上的屈曲载荷
+    P_c = 4.013*E*np.sqrt(x3**2 * x4**6/36) / L**2*(1-(x3/2*L)*np.sqrt(E/4*G))
+
+    # 剪應力(t)
+    t1 = P / (np.sqrt(2) * x1 * x2)
+    t2 = (M*R) / J
+    t = np.sqrt(t1**2+2*t1*t2*x2/(2*R)+t2**2)
+    # 約束條件
 
 
-# 定義梁的尺寸和形狀
-length = 3.0  # 梁的長度 (m)
-height = 0.15  # 梁的高度 (m)
-width = 0.2  # 梁的寬度 (m)
 
-# 定義荷載需求
-load = 1000.0  # 梁需要承受的荷載 (N)
-
-# 定義材料
-density = 7850.0  # 梁材料的密度 (kg/m^3)
-elasticity = 2.0e11  # 梁材料的彈性模量 (Pa)
-yield_strength = 250.0e6  # 梁材料的屈服強度 (Pa)
-
-# 定義強度要求
-safety_factor = 1.5  # 安全係數
-
-
-def calculate_strength(length, height, width, load, density, elasticity, yield_strength, safety_factor):
-    
-    
-    # 計算梁的斷面面積
-    area = height * width
-
-    # 計算梁的彈性變形
-    moment_of_inertia = width * height ** 3 / 12.0
-    max_stress = load * length ** 2 / (2.0 * moment_of_inertia * safety_factor)
-    deformation = load * length ** 3 / (3.0 * elasticity * moment_of_inertia)
+    if():
+        # 計算適應值
+        
