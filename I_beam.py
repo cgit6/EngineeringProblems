@@ -1,6 +1,5 @@
 # 工字樑結構設計
 import numpy as np
-
 import scipy as sp
 
 # 设置参数(主要)
@@ -29,7 +28,7 @@ def fun (X):
     if(g1<=16):
         # 聯立方程式求解
         def fit(X):
-            finess = sp
+            finess = sp.
 
 
     else:
