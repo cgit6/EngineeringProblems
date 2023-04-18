@@ -7,7 +7,7 @@ pop = 30
 # 維度
 dim = 2 # 维度
 # 最大迭代次數
-MaxIter = 100  
+MaxIter = 1000  
 # 下邊界
 lb = 0.001*np.ones(dim)
 # 上邊界

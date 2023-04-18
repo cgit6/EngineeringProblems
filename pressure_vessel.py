@@ -5,9 +5,9 @@ import numpy as np
 # 種群數量
 #设置参数
 #种群数量
-pop = 50 
+pop = 30
 #最大迭代次数
-MaxIter = 500 
+MaxIter = 1000
 #维度
 dim = 4 
 #下边界

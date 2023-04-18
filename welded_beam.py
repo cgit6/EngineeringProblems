@@ -9,9 +9,9 @@ dim = 4 # 维度
 # 最大迭代次數
 MaxIter = 1000
 # 下邊界
-lb = [0.1,0.1,0.1,0.1]
+lb = np.array([0.1,0.1,0.1,0.1])
 # 上邊界
-ub = [2,10,10,2]
+ub = np.array([2,10,10,2])
 
 # 參考焊接樑設計問題>問題模型(五)
 def fun(X):
@@ -66,7 +66,7 @@ def fun(X):
         # print("可行解限制函數: ",g1,g2,g3,g4,g5,g6,g7)
         fitness = 1.10471*x1**2*x2+0.04811*x3*x4*(14+x2)
     else:
-        print("不可行解限制函數: ",g1,g2,g3,g4,g5,g6,g7)
+        # print("不可行解限制函數: ",g1,g2,g3,g4,g5,g6,g7)
         fitness = 10E32
     
     return fitness
